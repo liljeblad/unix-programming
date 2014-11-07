@@ -25,7 +25,7 @@ int ex(nodeType *p)
                     ex(p->opr.op[0]);
                     printf("\tL%03d\n", lbl2 = lbl++); //Fix this line
                     ex(p->opr.op[1]);
-                    printf("\tjmp\tL%03d\n", lbl1);
+                    printf("\tjmp\t\tL%03d\n", lbl1);
                     printf("L%03d:\n", lbl2);
                     break;
                 case IF:
@@ -35,7 +35,7 @@ int ex(nodeType *p)
                         /* if else */
                         printf("\tL%03d\n", lbl1 = lbl++);
                         ex(p->opr.op[1]);
-                        printf("\tjmp\tL%03d\n", lbl2 = lbl++);
+                        printf("\tjmp\t\tL%03d\n", lbl2 = lbl++);
                         printf("L%03d:\n", lbl1);
                         ex(p->opr.op[2]);
                         printf("L%03d:\n", lbl2);
@@ -59,7 +59,11 @@ int ex(nodeType *p)
                     break;
                 case UMINUS:                //TODO
                     ex(p->opr.op[0]);
-                    printf("\t#call\tneg\n"); 
+                    printf("\tpopl\t%%eax\n");
+                    printf("\txorl\t%%edx, %%edx\n");
+                    printf("\tmovl\t$-1, %%ecx\n");
+                    printf("\tmull\t%%ecx\n");
+                    printf("\tpushl\t%%eax\n");
                     break;
             	case FACT:                     //TODO
               	    ex(p->opr.op[0]);
@@ -97,13 +101,13 @@ int ex(nodeType *p)
                             break;
                         case '*':
                             printf("\tpopl\t%%eax\n"); 
-                            printf("\tpopl\t%%ebx\n");
-                            printf("\tmull\t%%eax, %%ebx\n"); 
-                            printf("\tpushl\t%%ebx\n"); 
+                            printf("\tpopl\t%%ecx\n");
+                            printf("\tmull\t%%ecx\n"); 
+                            printf("\tpushl\t%%eax\n"); 
                             break;
                         case '/':
-                            printf("\tpopl\t%%eax\n"); 
-                            printf("\tpopl\t%%ebx\n");
+                            printf("\tpopl\t%%ebx\n"); 
+                            printf("\tpopl\t%%eax\n");
                             printf("\txorl\t%%edx, %%edx\n"); 
                             printf("\tidivl\t%%ebx\n");
                             printf("\tpushl\t%%eax\n"); 
@@ -112,37 +116,37 @@ int ex(nodeType *p)
                             printf("\tpopl\t%%eax\n"); 
                             printf("\tpopl\t%%ebx\n");
                             printf("\tcmpl\t%%eax, %%ebx\n"); 
-                            printf("\tjge"); 
+                            printf("\tjge\t"); 
                             break;
                         case '>':
                             printf("\tpopl\t%%eax\n"); 
                             printf("\tpopl\t%%ebx\n");
                             printf("\tcmpl\t%%eax, %%ebx\n"); 
-                            printf("\tjle"); 
+                            printf("\tjle\t"); 
                             break;
                         case GE:
                             printf("\tpopl\t%%eax\n"); 
                             printf("\tpopl\t%%ebx\n");
                             printf("\tcmpl\t%%eax, %%ebx\n"); 
-                            printf("\tjl"); 
+                            printf("\tjl\t"); 
                             break;
                         case LE:
                             printf("\tpopl\t%%eax\n"); 
                             printf("\tpopl\t%%ebx\n");
                             printf("\tcmpl\t%%eax, %%ebx\n"); 
-                            printf("\tjg"); 
+                            printf("\tjg\t"); 
                             break;
                         case NE:    
                             printf("\tpopl\t%%eax\n"); 
                             printf("\tpopl\t%%ebx\n");
                             printf("\tcmpl\t%%eax, %%ebx\n"); 
-                            printf("\tje"); 
+                            printf("\tje\t"); 
                             break;
                         case EQ:
                             printf("\tpopl\t%%eax\n"); 
                             printf("\tpopl\t%%ebx\n");
                             printf("\tcmpl\t%%eax, %%ebx\n"); 
-                            printf("\tjne");
+                            printf("\tjne\t");
                             break;
                     }
             }
