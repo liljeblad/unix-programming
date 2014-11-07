@@ -1,5 +1,5 @@
 .section .data
-output: .long 0
+str: .asciz "%d\n"
 a: .long 0
 b: .long 0
 c: .long 0
@@ -30,39 +30,46 @@ z: .long 0
 .section .text
 .globl _start
 _start:
-	push	732
-	pop	a
-	push	2684
-	pop	b
+	pushl	$732
+	popl	a
+	pushl	$2684
+	popl	b
 L000:
-	push	a
-	push	b
-	compNE
-	jz	L001
-	push	a
-	push	b
-	compGT
-	jz	L002
-	push	a
-	push	b
-	sub
-	pop	a
+	pushl	a
+	pushl	b
+	popl	%eax
+	popl	%ebx
+	cmpl	%eax, %ebx
+	je	L001
+	pushl	a
+	pushl	b
+	popl	%eax
+	popl	%ebx
+	cmpl	%eax, %ebx
+	jle	L002
+	pushl	a
+	pushl	b
+	popl	%eax
+	popl	%ebx
+	subl	%eax, %ebx
+	pushl	%ebx
+	popl	a
 	jmp	L003
 L002:
-	push	b
-	push	a
-	sub
-	pop	b
+	pushl	b
+	pushl	a
+	popl	%eax
+	popl	%ebx
+	subl	%eax, %ebx
+	pushl	%ebx
+	popl	b
 L003:
 	jmp	L000
 L001:
-	push	a
-	print
-	push	a
-	push	b
-	gcd
-	print
+	pushl	a
+	pushl	$str
+	call	printf
 
-exit:
-movl $1,%eax
+movl $1, %eax
+movl $0, %ebx
 int $0x80
