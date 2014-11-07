@@ -47,5 +47,5 @@ echo 'movl $0, %ebx' 		>> $ASM_OUT_FILE
 echo 'int $0x80' 			>> $ASM_OUT_FILE
 
 as $ASM_OUT_FILE -gstabs -o $EXECUTABLE_OUT_FILE.o
-ld $EXECUTABLE_OUT_FILE.o -o $EXECUTABLE_OUT_FILE -lc -I/lib/ld-linux.so.2
+ld functions.o $EXECUTABLE_OUT_FILE.o -o $EXECUTABLE_OUT_FILE -lc -I/lib/ld-linux.so.2
 rm $EXECUTABLE_OUT_FILE.o
