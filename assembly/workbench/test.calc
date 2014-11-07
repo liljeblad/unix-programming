@@ -1,0 +1,5 @@
+print fact 5;
+print lntwo 255;
+print lntwo 256;
+print lntwo 257;
+print 36 gcd 24;
