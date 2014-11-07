@@ -30,52 +30,27 @@ z: .long 0
 .section .text
 .globl _start
 _start:
-	pushl	$732
-	popl	a
-	pushl	$2684
-	popl	b
+	pushl	$100
+	popl	i
 L000:
-	pushl	a
-	pushl	b
+	pushl	i
+	pushl	$0
 	popl	%eax
 	popl	%ebx
 	cmpl	%eax, %ebx
-	je	L001
-	pushl	a
-	pushl	b
-	popl	%eax
-	popl	%ebx
-	cmpl	%eax, %ebx
-	jle	L002
-	pushl	a
-	pushl	b
+	jl	L001
+	pushl	i
+	pushl	$str
+	call	printf
+	pushl	i
+	pushl	$1
 	popl	%eax
 	popl	%ebx
 	subl	%eax, %ebx
 	pushl	%ebx
-	popl	a
-	jmp	L003
-L002:
-	pushl	b
-	pushl	a
-	popl	%eax
-	popl	%ebx
-	subl	%eax, %ebx
-	pushl	%ebx
-	popl	b
-L003:
+	popl	i
 	jmp	L000
 L001:
-	pushl	a
-	pushl	$str
-	call	printf
-	pushl	a
-	pushl	b
-	call	gcd
-	addl	$8, %esp
-	pushl	%eax
-	pushl	$str
-	call	printf
 
 movl $1, %eax
 movl $0, %ebx
