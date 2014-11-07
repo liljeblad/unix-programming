@@ -40,13 +40,13 @@ L000:
 	popl	%eax
 	popl	%ebx
 	cmpl	%eax, %ebx
-	je	L001
+	je		L001
 	pushl	a
 	pushl	b
 	popl	%eax
 	popl	%ebx
 	cmpl	%eax, %ebx
-	jle	L002
+	jle		L002
 	pushl	a
 	pushl	b
 	popl	%eax
@@ -54,7 +54,7 @@ L000:
 	subl	%eax, %ebx
 	pushl	%ebx
 	popl	a
-	jmp	L003
+	jmp		L003
 L002:
 	pushl	b
 	pushl	a
@@ -64,7 +64,7 @@ L002:
 	pushl	%ebx
 	popl	b
 L003:
-	jmp	L000
+	jmp		L000
 L001:
 	pushl	a
 	pushl	$str

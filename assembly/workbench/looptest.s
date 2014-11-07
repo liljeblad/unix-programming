@@ -38,7 +38,7 @@ L000:
 	popl	%eax
 	popl	%ebx
 	cmpl	%eax, %ebx
-	jl	L001
+	jl		L001
 	pushl	i
 	pushl	$str
 	call	printf
@@ -49,7 +49,7 @@ L000:
 	subl	%eax, %ebx
 	pushl	%ebx
 	popl	i
-	jmp	L000
+	jmp		L000
 L001:
 
 movl $1, %eax
