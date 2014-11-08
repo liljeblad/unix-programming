@@ -1,5 +1,11 @@
+print fact 0;
+print fact 1;
+print fact 2;
+print fact 3;
+print fact 4;
 print fact 5;
-print lntwo 255;
-print lntwo 256;
-print lntwo 257;
+print lntwo 31;
+print lntwo 32;
+print lntwo 33;
 print 36 gcd 24;
+print 732 gcd 2684;

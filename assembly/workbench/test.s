@@ -30,25 +30,55 @@ z: .long 0
 .section .text
 .globl _start
 _start:
+	pushl	$0
+	call	fact
+	addl	$8, %esp
+	pushl	%eax
+	pushl	$str
+	call	printf
+	pushl	$1
+	call	fact
+	addl	$8, %esp
+	pushl	%eax
+	pushl	$str
+	call	printf
+	pushl	$2
+	call	fact
+	addl	$8, %esp
+	pushl	%eax
+	pushl	$str
+	call	printf
+	pushl	$3
+	call	fact
+	addl	$8, %esp
+	pushl	%eax
+	pushl	$str
+	call	printf
+	pushl	$4
+	call	fact
+	addl	$8, %esp
+	pushl	%eax
+	pushl	$str
+	call	printf
 	pushl	$5
 	call	fact
 	addl	$8, %esp
 	pushl	%eax
 	pushl	$str
 	call	printf
-	pushl	$255
+	pushl	$31
 	call	lntwo
 	addl	$8, %esp
 	pushl	%eax
 	pushl	$str
 	call	printf
-	pushl	$256
+	pushl	$32
 	call	lntwo
 	addl	$8, %esp
 	pushl	%eax
 	pushl	$str
 	call	printf
-	pushl	$257
+	pushl	$33
 	call	lntwo
 	addl	$8, %esp
 	pushl	%eax
@@ -56,6 +86,13 @@ _start:
 	call	printf
 	pushl	$36
 	pushl	$24
+	call	gcd
+	addl	$8, %esp
+	pushl	%eax
+	pushl	$str
+	call	printf
+	pushl	$732
+	pushl	$2684
 	call	gcd
 	addl	$8, %esp
 	pushl	%eax
