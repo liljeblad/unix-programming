@@ -1,12 +1,33 @@
 #! /bin/bash
 
+if [ $# -ne 1 ]
+then
+	echo "You need pass an argument.";
+	echo "Usage: ./i836-driver.sh <file>.calc";
+	exit 0;
+fi
+
+if [[ ${1: -5} != ".calc" ]]
+then
+	echo "File passed in needs to be of type .calc.";
+	echo "Usage: ./i836-driver.sh <file>.calc";
+	exit 0;
+fi
+
+if [ ! -e $1 ]
+then
+	echo "The specified file doesn't exist.";
+	echo "Usage: ./i836-driver.sh <file>.calc";
+	exit 0;
+fi
+
 INFILE=$1
 
 EXECUTABLE_OUT_FILE=`echo $INFILE | cut -d "." -f1`
 ASM_OUT_FILE=`echo "$EXECUTABLE_OUT_FILE.s"`
 
 echo ".section .data" 		> $ASM_OUT_FILE
-echo 'str: .asciz "%d\n"'		>> $ASM_OUT_FILE
+echo 'str: .asciz "%d\n"'	>> $ASM_OUT_FILE
 echo "a: .long 0" 			>> $ASM_OUT_FILE
 echo "b: .long 0" 			>> $ASM_OUT_FILE
 echo "c: .long 0" 			>> $ASM_OUT_FILE
